@@ -1,0 +1,391 @@
+/* ── Reset & Base ─────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  color: #2d3748;
+  min-height: 100vh;
+}
+
+/* ── Header & Navigation ─────────────────────────────────────────── */
+header {
+  background: #2b6cb0;
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+nav button {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+
+nav button.active,
+nav button:hover {
+  background: #fff;
+  color: #2b6cb0;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────── */
+.container {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+/* ── Typography ──────────────────────────────────────────────────── */
+h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #2b6cb0;
+}
+
+/* ── Card ────────────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Forms ────────────────────────────────────────────────────────── */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-row > * {
+  flex: 1;
+  min-width: 140px;
+}
+
+label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #718096;
+  margin-bottom: 4px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #2d3748;
+  outline: none;
+  transition: 0.2s;
+  background: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2b6cb0;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────── */
+.btn {
+  padding: 9px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: #2b6cb0;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2c5282;
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 0.8rem;
+}
+
+.btn-danger {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #c53030;
+}
+
+.btn-success {
+  background: #38a169;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #276749;
+}
+
+/* ── Table ────────────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+th {
+  text-align: left;
+  padding: 9px 10px;
+  background: #ebf4ff;
+  color: #2b6cb0;
+  font-weight: 700;
+}
+
+td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0f4f8;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Badges ──────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #bee3f8;
+  color: #2c5282;
+}
+
+.badge-green {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.badge-red {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.badge-gray {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+/* ── Trip Cards ──────────────────────────────────────────────────── */
+.trip-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  border-left: 4px solid #2b6cb0;
+  transition: 0.2s;
+}
+
+.trip-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+}
+
+.trip-card.selected {
+  border-left-color: #38a169;
+  background: #f0fff4;
+}
+
+.trip-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.trip-card p {
+  font-size: 0.82rem;
+  color: #718096;
+  margin-top: 4px;
+}
+
+/* ── Stats Row ───────────────────────────────────────────────────── */
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  min-width: 120px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.stat-box .num {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2b6cb0;
+}
+
+.stat-box .lbl {
+  font-size: 0.78rem;
+  color: #718096;
+  margin-top: 2px;
+}
+
+/* ── Balances ────────────────────────────────────────────────────── */
+.balance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f4f8;
+}
+
+.balance-row:last-child {
+  border-bottom: none;
+}
+
+.owe {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.get {
+  color: #38a169;
+  font-weight: 600;
+}
+
+/* ── Search ───────────────────────────────────────────────────────── */
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-bar input {
+  max-width: 320px;
+}
+
+/* ── Misc ─────────────────────────────────────────────────────────── */
+.empty {
+  text-align: center;
+  color: #a0aec0;
+  padding: 32px 0;
+  font-size: 0.9rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tag {
+  background: #ebf4ff;
+  color: #2b6cb0;
+  border-radius: 12px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+}
+
+.tag button {
+  background: none;
+  border: none;
+  color: #2b6cb0;
+  cursor: pointer;
+  margin-left: 4px;
+  font-size: 0.9rem;
+}
+
+.day-group {
+  margin-bottom: 16px;
+}
+
+.day-group h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2b6cb0;
+  padding: 6px 10px;
+  background: #ebf4ff;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.itinerary-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f4f8;
+}
+
+.itinerary-item:last-child {
+  border-bottom: none;
+}
+
+.time-badge {
+  min-width: 60px;
+  font-size: 0.78rem;
+  color: #718096;
+  padding-top: 2px;
+}
+
+.no-trip-msg {
+  background: #fff3cd;
+  border-radius: 8px;
+  padding: 14px;
+  color: #856404;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}

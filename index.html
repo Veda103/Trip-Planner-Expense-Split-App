@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trip Planner & Expense Splitter</title>
+
+  <!-- Styles (UI Layer) -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ── Header & Navigation ───────────────────────────────────────── -->
+<header>
+  <h1>✈️ Trip Planner & Expense Splitter</h1>
+  <nav>
+    <button class="active" onclick="showSection('trips')">Trips</button>
+    <button onclick="showSection('itinerary')">Itinerary</button>
+    <button onclick="showSection('expenses')">Expenses</button>
+    <button onclick="showSection('balances')">Balances</button>
+    <button onclick="showSection('dashboard')">Dashboard</button>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <!--  TRIPS SECTION                                                 -->
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <div id="sec-trips" class="section active">
+    <div class="card">
+      <h2>Create New Trip</h2>
+      <div class="form-row">
+        <div><label>Trip Name</label><input id="t-name" placeholder="e.g. Goa Getaway" /></div>
+        <div><label>Destination</label><input id="t-dest" placeholder="e.g. Goa, India" /></div>
+      </div>
+      <div class="form-row">
+        <div><label>Start Date</label><input type="date" id="t-start" /></div>
+        <div><label>End Date</label><input type="date" id="t-end" /></div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>Add Participants</label>
+          <div style="display:flex;gap:8px">
+            <input id="t-part" placeholder="Participant name" />
+            <button class="btn btn-success btn-sm" onclick="addTempParticipant()">Add</button>
+          </div>
+          <div class="tag-list" id="temp-parts"></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="createTrip()">Create Trip</button>
+    </div>
+
+    <div class="search-bar">
+      <input id="trip-search" placeholder="🔍 Search trips by name..." oninput="renderTrips()" />
+    </div>
+    <div id="trips-list"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <!--  ITINERARY SECTION                                             -->
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <div id="sec-itinerary" class="section">
+    <div id="no-trip-it" class="no-trip-msg">⚠️ Please select a trip first from the Trips tab.</div>
+    <div id="itin-content" style="display:none">
+      <div class="card">
+        <h2>Add Itinerary Item</h2>
+        <div class="form-row">
+          <div><label>Date</label><input type="date" id="i-date" /></div>
+          <div><label>Time (optional)</label><input type="time" id="i-time" /></div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Activity Description</label>
+            <textarea id="i-desc" placeholder="Describe the activity..."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addItinerary()">Add to Itinerary</button>
+      </div>
+      <div class="card">
+        <h2>Day-wise Itinerary</h2>
+        <div id="itin-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <!--  EXPENSES SECTION                                              -->
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <div id="sec-expenses" class="section">
+    <div id="no-trip-ex" class="no-trip-msg">⚠️ Please select a trip first from the Trips tab.</div>
+    <div id="exp-content" style="display:none">
+      <div class="card">
+        <h2>Add Expense</h2>
+        <div class="form-row">
+          <div><label>Amount (₹)</label><input type="number" id="e-amt" placeholder="0.00" min="0" /></div>
+          <div><label>Paid By</label><select id="e-paid"></select></div>
+        </div>
+        <div class="form-row">
+          <div><label>Description</label><input id="e-desc" placeholder="e.g. Hotel booking" /></div>
+          <div><label>Date</label><input type="date" id="e-date" /></div>
+        </div>
+        <button class="btn btn-primary" onclick="addExpense()">Add Expense</button>
+      </div>
+      <div class="card">
+        <h2>Expense List</h2>
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+          <div>
+            <label>Filter by Participant</label>
+            <select id="exp-filter-part" onchange="renderExpenses()"><option value="">All</option></select>
+          </div>
+          <div>
+            <label>Filter by Date</label>
+            <input type="date" id="exp-filter-date" oninput="renderExpenses()" />
+          </div>
+          <div style="display:flex;align-items:flex-end">
+            <button class="btn btn-sm" style="background:#e2e8f0" onclick="clearExpFilter()">Clear</button>
+          </div>
+        </div>
+        <div id="exp-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <!--  BALANCES SECTION                                              -->
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <div id="sec-balances" class="section">
+    <div id="no-trip-bal" class="no-trip-msg">⚠️ Please select a trip first from the Trips tab.</div>
+    <div id="bal-content" style="display:none">
+      <div class="card">
+        <h2>Per-Person Summary</h2>
+        <div id="per-person"></div>
+      </div>
+      <div class="card">
+        <h2>Who Owes Whom</h2>
+        <div id="settlements"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <!--  DASHBOARD SECTION                                             -->
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <div id="sec-dashboard" class="section">
+    <div id="no-trip-dash" class="no-trip-msg">⚠️ Please select a trip first from the Trips tab.</div>
+    <div id="dash-content" style="display:none">
+      <div id="dash-stats" class="stats-row"></div>
+      <div class="card">
+        <h2>Participants</h2>
+        <div id="dash-parts"></div>
+      </div>
+      <div class="card">
+        <h2>Recent Expenses</h2>
+        <div id="dash-recent"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- Logic Layer -->
+<script src="app.js"></script>
+
+</body>
+</html>
